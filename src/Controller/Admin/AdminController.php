@@ -23,6 +23,14 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/users", name="admin_show_users")
+     */
+    public function showUsers(): Response
+    {
+        return $this->render('admin/users.html.twig');
+    }
+
+    /**
      * @Route("/users/new", name="admin_new_user")
      */
     public function newUser(Request $request): Response
