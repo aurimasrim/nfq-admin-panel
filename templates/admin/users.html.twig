@@ -14,6 +14,11 @@
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.name }}</td>
+                        <td>
+                            <form action="{{ url('admin_delete_user', {id: user.id}) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
