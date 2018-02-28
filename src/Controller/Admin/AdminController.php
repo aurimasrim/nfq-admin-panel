@@ -49,7 +49,7 @@ class AdminController extends AbstractController
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('admin_show_users');
         }
 
         return $this->render('admin/new_user.html.twig', [
