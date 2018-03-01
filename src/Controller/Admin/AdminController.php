@@ -9,6 +9,7 @@ use App\Form\UserType;
 use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -141,6 +142,22 @@ class AdminController extends AbstractController
     {
         $userId = $request->get('userId');
         $group->addUser($userRepository->find($userId));
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('admin_show_group', [
+            'id' => $group->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/groups/{groupId}/remove/{userId}", name="admin_remove_user_from_group")
+     * @Method("POST")
+     * @ParamConverter("group", options={"mapping": {"groupId": "id"}})
+     * @ParamConverter("user", options={"mapping": {"userId": "id"}})
+     */
+    public function removeUserFromGroup(Group $group, User $user): Response
+    {
+        $group->removeUser($user);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('admin_show_group', [
