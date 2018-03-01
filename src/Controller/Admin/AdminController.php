@@ -109,10 +109,14 @@ class AdminController extends AbstractController
     /**
      * @Route("/groups/{id}", name="admin_show_group")
      */
-    public function showGroup(Group $group): Response
+    public function showGroup(Group $group, UserRepository $userRepository): Response
     {
+        $usersNotInGroup = $userRepository->findByNotInGroup($group->getId());
+
         return $this->render("admin/group.html.twig", [
-            'users' => $group->getUsers()
+            'groupId' => $group->getId(),
+            'users' => $group->getUsers(),
+            'usersNotInGroup' => $usersNotInGroup
         ]);
     }
 

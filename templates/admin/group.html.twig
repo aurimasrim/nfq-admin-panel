@@ -20,5 +20,13 @@
                 {% endfor %}
             </tbody>
         </table>
+        <form method="post">
+            <select name="userId">
+                {% for user in usersNotInGroup %}
+                    <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add to group">
+        </form>
     </div>
 {% endblock %}
