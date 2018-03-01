@@ -20,13 +20,15 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form action="{{ url('admin_add_user_to_group', {id: groupId}) }}" method="post">
-            <select name="userId">
-                {% for user in usersNotInGroup %}
-                    <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Add to group">
-        </form>
+        {% if usersNotInGroup is not empty %}
+            <form action="{{ url('admin_add_user_to_group', {id: groupId}) }}" method="post">
+                <select name="userId">
+                    {% for user in usersNotInGroup %}
+                        <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Add to group">
+            </form>
+        {% endif %}
     </div>
 {% endblock %}
