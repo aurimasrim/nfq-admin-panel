@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\GroupType;
 use App\Form\UserType;
 use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
@@ -53,7 +54,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_show_users');
         }
 
-        return $this->render('admin/new_user.html.twig', [
+        return $this->render('admin/new_user_or _group.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -80,6 +81,27 @@ class AdminController extends AbstractController
 
         return $this->render('admin/groups.html.twig', [
             'groups' => $groups
+        ]);
+    }
+
+    /**
+     * @Route("/groups/new", name="admin_new_group")
+     */
+    public function newGroup(Request $request): Response
+    {
+        $form = $this->createForm(GroupType::class, null);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirectToRoute('admin_show_groups');
+        }
+
+        return $this->render('admin/new_user_or _group.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
