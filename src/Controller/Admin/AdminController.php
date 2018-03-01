@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -68,5 +69,17 @@ class AdminController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute("admin_show_users");
+    }
+
+    /**
+     * @Route("/groups", name="admin_show_groups")
+     */
+    public function showGroups(GroupRepository $groupRepository): Response
+    {
+        $groups = $groupRepository->findAll();
+
+        return $this->render('admin/groups.html.twig', [
+            'groups' => $groups
+        ]);
     }
 }
