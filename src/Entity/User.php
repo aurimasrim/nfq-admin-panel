@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,13 @@ class User
      */
     private $name;
 
+    /**
+     * @var Group[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Group", mappedBy="users")
+     */
+    private $groups;
+
     public function __construct(string $name)
     {
         $this->name = $name;
@@ -44,5 +53,10 @@ class User
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getGroups(): Collection
+    {
+        return $this->groups;
     }
 }

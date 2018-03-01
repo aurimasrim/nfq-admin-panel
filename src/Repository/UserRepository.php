@@ -18,4 +18,19 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function findByNotInGroup(int $groupId): array
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT u
+                FROM App:User u
+                WHERE u NOT IN (
+                  SELECT us
+                  FROM App:User us
+                  JOIN us.groups g
+                  WHERE g.id = :groupId
+                )
+            ')->setParameter('groupId', $groupId)->getResult();
+    }
 }

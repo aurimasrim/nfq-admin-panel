@@ -31,7 +31,7 @@ class Group
     /**
      * @var User[]|ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="groups")
      * @ORM\JoinTable(name="groups_users")
      */
     private $users;
