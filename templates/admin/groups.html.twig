@@ -19,7 +19,11 @@
                         <td>
                             <a class="btn btn-primary" href="#">Show users</a>
                         </td>
-                        <td>Delete</td>
+                        <td>
+                            <form action="{{ url('admin_delete_group', {id: group.id}) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

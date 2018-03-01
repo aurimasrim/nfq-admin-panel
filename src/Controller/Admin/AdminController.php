@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Group;
 use App\Entity\User;
 use App\Form\GroupType;
 use App\Form\UserType;
@@ -103,5 +104,18 @@ class AdminController extends AbstractController
         return $this->render('admin/new_user_or _group.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/groups/{id}/delete", name="admin_delete_group")
+     * @Method("POST")
+     */
+    public function deleteGroup(Group $group): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($group);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_show_groups");
     }
 }
