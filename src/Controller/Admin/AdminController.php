@@ -132,4 +132,19 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute("admin_show_groups");
     }
+
+    /**
+     * @Route("/groups/{id}/add", name="admin_add_user_to_group")
+     * @Method("POST")
+     */
+    public function addUserToGroup(Group $group, Request $request, UserRepository $userRepository): Response
+    {
+        $userId = $request->get('userId');
+        $group->addUser($userRepository->find($userId));
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('admin_show_group', [
+            'id' => $group->getId()
+        ]);
+    }
 }

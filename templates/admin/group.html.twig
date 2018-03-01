@@ -20,7 +20,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <form method="post">
+        <form action="{{ url('admin_add_user_to_group', {id: groupId}) }}" method="post">
             <select name="userId">
                 {% for user in usersNotInGroup %}
                     <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>
