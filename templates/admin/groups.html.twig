@@ -17,7 +17,7 @@
                         <td>{{ group.id }}</td>
                         <td>{{ group.name }}</td>
                         <td>
-                            <a class="btn btn-primary" href="#">Show users</a>
+                            <a class="btn btn-primary" href="{{ path('admin_show_group', {id: group.id})}}">Show users</a>
                         </td>
                         <td>
                             <form action="{{ url('admin_delete_group', {id: group.id}) }}" method="post">

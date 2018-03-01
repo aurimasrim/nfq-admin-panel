@@ -107,6 +107,16 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/groups/{id}", name="admin_show_group")
+     */
+    public function showGroup(Group $group): Response
+    {
+        return $this->render("admin/group.html.twig", [
+            'users' => $group->getUsers()
+        ]);
+    }
+
+    /**
      * @Route("/groups/{id}/delete", name="admin_delete_group")
      * @Method("POST")
      */
