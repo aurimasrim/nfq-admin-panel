@@ -32,7 +32,10 @@ class Group
      * @var User[]|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="groups")
-     * @ORM\JoinTable(name="groups_users")
+     * @ORM\JoinTable(name="groups_users",
+     *     joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="restrict")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")}
+     *     )
      */
     private $users;
 
