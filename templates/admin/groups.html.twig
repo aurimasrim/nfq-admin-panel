@@ -20,9 +20,11 @@
                             <a class="btn btn-primary" href="{{ path('admin_show_group', {id: group.id})}}">Show users</a>
                         </td>
                         <td>
-                            <form action="{{ url('admin_delete_group', {id: group.id}) }}" method="post">
-                                <input type="submit" value="Delete">
-                            </form>
+                            {% if group.users is empty %}
+                                <form action="{{ url('admin_delete_group', {id: group.id}) }}" method="post">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
