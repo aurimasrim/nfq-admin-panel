@@ -1,13 +1,23 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+    encoders:
+        App\Entity\Admin:
+            algorithm: bcrypt
     providers:
-        in_memory: { memory: ~ }
+        custom_provider:
+            entity:
+                class: App\Entity\Admin
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            pattern: ^/
+            http_basic: ~
+            provider: custom_provider
+#            anonymous: true
 
             # activate different ways to authenticate
 
