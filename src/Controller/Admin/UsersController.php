@@ -50,7 +50,8 @@ class UsersController extends AbstractController
         }
 
         return $this->render('admin/new_user_or _group.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'header' => 'New user'
         ]);
     }
 

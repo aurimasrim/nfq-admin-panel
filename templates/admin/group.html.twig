@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="container">
+        <h1>{{ group.name }}</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -11,12 +12,12 @@
                 </tr>
             </thead>
             <tbody>
-                {% for user in users %}
+                {% for user in group.users %}
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.name }}</td>
                         <td>
-                            <form action="{{ url('admin_groups_remove_user', {groupId: groupId, userId: user.id}) }}" method="post">
+                            <form action="{{ url('admin_groups_remove_user', {groupId: group.id, userId: user.id}) }}" method="post">
                                 <input type="submit" value="Remove">
                             </form>
                         </td>
@@ -25,7 +26,7 @@
             </tbody>
         </table>
         {% if usersNotInGroup is not empty %}
-            <form action="{{ url('admin_groups_add_user', {id: groupId}) }}" method="post">
+            <form action="{{ url('admin_groups_add_user', {id: group.id}) }}" method="post">
                 <select name="userId">
                     {% for user in usersNotInGroup %}
                         <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>

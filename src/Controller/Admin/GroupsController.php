@@ -49,7 +49,8 @@ class GroupsController extends AbstractController
         }
 
         return $this->render('admin/new_user_or _group.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'header' => 'New group'
         ]);
     }
 
@@ -61,8 +62,7 @@ class GroupsController extends AbstractController
         $usersNotInGroup = $userRepository->findByNotInGroup($group->getId());
 
         return $this->render("admin/group.html.twig", [
-            'groupId' => $group->getId(),
-            'users' => $group->getUsers(),
+            'group' => $group,
             'usersNotInGroup' => $usersNotInGroup
         ]);
     }
