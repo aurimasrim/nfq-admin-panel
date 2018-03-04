@@ -63,7 +63,7 @@ class GroupsController extends AbstractController
     {
         $usersNotInGroup = $userRepository->findByNotInGroup($group->getId());
 
-        return $this->render("admin/group.html.twig", [
+        return $this->render('admin/group.html.twig', [
             'group' => $group,
             'usersNotInGroup' => $usersNotInGroup
         ]);
@@ -83,7 +83,7 @@ class GroupsController extends AbstractController
         $em->remove($group);
         $em->flush();
 
-        return $this->redirectToRoute("admin_groups_index");
+        return $this->redirectToRoute('admin_groups_index');
     }
 
     /**

@@ -73,6 +73,7 @@ class Group
             $this->users->add($user);
         }
     }
+
     public function removeUser(User $user): void
     {
         $this->users->removeElement($user);

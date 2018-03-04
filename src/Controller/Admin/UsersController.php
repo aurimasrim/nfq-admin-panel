@@ -3,14 +3,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Group;
 use App\Entity\User;
-use App\Form\GroupType;
 use App\Form\UserType;
-use App\Repository\GroupRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,6 +61,6 @@ class UsersController extends AbstractController
         $em->remove($user);
         $em->flush();
 
-        return $this->redirectToRoute("admin_users_index");
+        return $this->redirectToRoute('admin_users_index');
     }
 }
