@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/admin/groups")
@@ -56,6 +57,7 @@ class GroupsController extends AbstractController
 
     /**
      * @Route("/{id}", name="admin_groups_show")
+     * @Entity("group", expr="repository.findById(id)")
      */
     public function show(Group $group, UserRepository $userRepository): Response
     {
