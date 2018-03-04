@@ -75,6 +75,10 @@ class GroupsController extends AbstractController
      */
     public function delete(Group $group): Response
     {
+        if (!$group->getUsers()->isEmpty()) {
+            return new Response(null, Response::HTTP_CONFLICT);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($group);
         $em->flush();
