@@ -18,12 +18,14 @@
                         <td>{{ group.id }}</td>
                         <td>{{ group.name }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ path('admin_groups_show', {id: group.id})}}">Show users</a>
+                            <a class="btn btn-primary" href="{{ path('admin_groups_show', {id: group.id})}}"><span class="glyphicon glyphicon-list-alt"></span></a>
                         </td>
                         <td>
                             {% if group.users is empty %}
                                 <form action="{{ url('admin_groups_delete', {id: group.id}) }}" method="post">
-                                    <input type="submit" value="Delete">
+                                    <button type="submit" class="btn btn-danger btn-xs">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
                                 </form>
                             {% endif %}
                         </td>
@@ -31,6 +33,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-success" href="{{ path('admin_groups_new') }}">Add group</a>
+        <a class="btn btn-success" href="{{ path('admin_groups_new') }}"><span class="glyphicon glyphicon-plus"></span> Create group</a>
     </div>
 {% endblock %}

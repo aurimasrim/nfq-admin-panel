@@ -17,13 +17,15 @@
                         <td>{{ user.name }}</td>
                         <td>
                             <form action="{{ url('admin_users_delete', {id: user.id}) }}" method="post">
-                                <input type="submit" value="Delete">
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
                             </form>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-success" href="{{ path('admin_users_new') }}">Add user</a>
+        <a class="btn btn-success" href="{{ path('admin_users_new') }}"><span class="glyphicon glyphicon-plus"></span> Create user</a>
     </div>
 {% endblock %}

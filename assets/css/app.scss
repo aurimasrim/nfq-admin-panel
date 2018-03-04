@@ -1,3 +1,6 @@
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/glyphicons';
+
 .form-signin {
     width: 100%;
     max-width: 350px;
@@ -17,5 +20,9 @@
 .container {
     width: 100%;
     margin-top: 25px;
+}
+
+.form-adduser {
+    width: 350px;
 }
 

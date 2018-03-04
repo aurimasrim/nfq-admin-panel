@@ -18,7 +18,9 @@
                         <td>{{ user.name }}</td>
                         <td>
                             <form action="{{ url('admin_groups_remove_user', {groupId: group.id, userId: user.id}) }}" method="post">
-                                <input type="submit" value="Remove">
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -26,13 +28,15 @@
             </tbody>
         </table>
         {% if usersNotInGroup is not empty %}
-            <form action="{{ url('admin_groups_add_user', {id: group.id}) }}" method="post">
-                <select name="userId">
+            <form class="form-adduser input-group" action="{{ url('admin_groups_add_user', {id: group.id}) }}" method="post">
+                <select class="custom-select" name="userId">
                     {% for user in usersNotInGroup %}
                         <option value="{{ user.id }}">{{ user.id }}. {{ user.name }}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" value="Add to group">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add to group</button>
+                </div>
             </form>
         {% endif %}
     </div>
