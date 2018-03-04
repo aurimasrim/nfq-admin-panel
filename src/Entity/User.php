@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -25,6 +26,8 @@ class User
      * @var string
      *
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=100)
      */
     private $name;
 
@@ -35,7 +38,7 @@ class User
      */
     private $groups;
 
-    public function __construct(string $name)
+    public function __construct(?string $name)
     {
         $this->name = $name;
     }
@@ -45,7 +48,7 @@ class User
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
