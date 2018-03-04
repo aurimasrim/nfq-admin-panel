@@ -43,6 +43,11 @@ class Admin implements UserInterface, \Serializable
         return $this->username;
     }
 
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
     public function getSalt(): ?string
     {
         return null;
@@ -51,6 +56,11 @@ class Admin implements UserInterface, \Serializable
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
     public function getRoles(): array
