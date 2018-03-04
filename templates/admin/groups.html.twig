@@ -21,13 +21,11 @@
                             <a class="btn btn-primary" href="{{ path('admin_groups_show', {id: group.id})}}"><span class="glyphicon glyphicon-list-alt"></span></a>
                         </td>
                         <td>
-                            {% if group.users is empty %}
-                                <form action="{{ url('admin_groups_delete', {id: group.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this group?');">
-                                    <button type="submit" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </form>
-                            {% endif %}
+                            <form action="{{ url('admin_groups_delete', {id: group.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this group?');">
+                                <button type="submit" class="btn btn-danger btn-xs" {% if group.users is not empty %} disabled title="Group is not empty"{% endif %}>
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
