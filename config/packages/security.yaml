@@ -22,6 +22,7 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: admin_users_index
+                csrf_token_generator: security.csrf.token_manager
 
             logout:
                 path: /logout

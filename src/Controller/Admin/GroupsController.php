@@ -73,8 +73,12 @@ class GroupsController extends AbstractController
      * @Route("/{id}/delete", name="admin_groups_delete")
      * @Method("POST")
      */
-    public function delete(Group $group): Response
+    public function delete(Request $request, Group $group): Response
     {
+        if (!$this->isCsrfTokenValid('delete_group', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_groups_index');
+        }
+
         if (!$group->getUsers()->isEmpty()) {
             return new Response(null, Response::HTTP_CONFLICT);
         }
@@ -90,8 +94,14 @@ class GroupsController extends AbstractController
      * @Route("/{id}/add", name="admin_groups_add_user")
      * @Method("POST")
      */
-    public function addUser(Group $group, Request $request, UserRepository $userRepository): Response
+    public function addUser(Request $request, Group $group, UserRepository $userRepository): Response
     {
+        if (!$this->isCsrfTokenValid('add_user', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_groups_show', [
+                'id' => $group->getId()
+            ]);
+        }
+
         $userId = $request->get('userId');
         $group->addUser($userRepository->find($userId));
         $this->getDoctrine()->getManager()->flush();
@@ -107,8 +117,14 @@ class GroupsController extends AbstractController
      * @ParamConverter("group", options={"mapping": {"groupId": "id"}})
      * @ParamConverter("user", options={"mapping": {"userId": "id"}})
      */
-    public function removeUser(Group $group, User $user): Response
+    public function removeUser(Request $request, Group $group, User $user): Response
     {
+        if (!$this->isCsrfTokenValid('remove_user', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_groups_show', [
+                'id' => $group->getId()
+            ]);
+        }
+
         $group->removeUser($user);
         $this->getDoctrine()->getManager()->flush();
 

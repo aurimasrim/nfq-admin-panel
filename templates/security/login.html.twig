@@ -9,6 +9,7 @@
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <input class="form-control" type="text" id="username" name="_username" required autofocus placeholder="Username" value="{{ last_username }}" />
             <input class="form-control" type="password" id="password" name="_password" required placeholder="Password"/>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">login</button>
         </form>
     </div>

@@ -55,8 +55,12 @@ class UsersController extends AbstractController
      * @Route("/{id}/delete", name="admin_users_delete")
      * @Method("POST")
      */
-    public function deleteUser(User $user): Response
+    public function deleteUser(Request $request, User $user): Response
     {
+        if (!$this->isCsrfTokenValid('delete_user', $request->request->get('token'))) {
+            return $this->redirectToRoute('admin_users_index');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
